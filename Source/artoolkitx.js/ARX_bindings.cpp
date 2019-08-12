@@ -21,7 +21,7 @@ EMSCRIPTEN_BINDINGS(constant_bindings) {
     function("arwStartRunningJS", &arwStartRunningJS);
     function("pushVideoInit", &pushVideoInit);
     function("getError", &arwGetError);
-    
+
     function("isRunning", &arwIsRunning);
     function("isInitialized", &arwIsInited);
     function("stopRunning", &arwStopRunning);
@@ -105,13 +105,13 @@ EMSCRIPTEN_BINDINGS(constant_bindings) {
     function("addTrackable", &addTrackable);
 
     //TODO: To be implemented
-    // value_object<ARWTrackableStatus>("ARWTrackableStatus")
-    //     .field("uid", &ARWTrackableStatus::uid)
-    //     .field("visible", &ARWTrackableStatus::visible)
-    //     .field("matrix", &ARWTrackableStatus::matrix)
-    //     .field("matrixR", &ARWTrackableStatus::matrixR)
-    // ;
-    // function("getTrackables", &arwGetTrackables);
+    value_object<ARWTrackableStatus>("ARWTrackableStatus")
+         .field("uid", &ARWTrackableStatus::uid)
+         .field("visible", &ARWTrackableStatus::visible)
+         .field("matrix", &ARWTrackableStatus::matrix)
+         .field("matrixR", &ARWTrackableStatus::matrixR)
+     ;
+    //function("getTrackables", &arwGetTrackables, allow_raw_pointers());
     function("removeTrackable", &arwRemoveTrackable);
     function("removeAllTrackables", &arwRemoveAllTrackables);
 

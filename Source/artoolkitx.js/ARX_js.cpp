@@ -1,6 +1,6 @@
 /**
- *  
- * 
+ *
+ *
  */
 
 #include "ARX_js.h"
@@ -24,7 +24,7 @@ int addTrackable(std::string cfg) {
 
     /**
      * Initialises and starts video capture.
-     * 
+     *
      * @param cparamName    The URL to the camera parameter file. NULL if none required or if using an image as input
      * @param width         The width of the video frame/image to process
      * @param height        The height of the video frame/image to process
@@ -67,9 +67,16 @@ VideoParams getVideoParams() {
 }
 
 //TODO: to be implemented
-// bool getTrackables() {
-//     int count;
-//     ARWTrackableStatus status;
-//     arwGetTrackables(&count, status)
-// }
-
+ TrackablesInfo getTrackables(int count) {
+     ARWTrackableStatus *status;
+     TrackablesInfo trackI;
+     if ( !arwGetTrackables(&count, &(status)))
+      return trackI;
+     else {
+        trackI.uid = status->uid;
+        trackI.visible = status->visible;
+        trackI.matrix = status->matrix;
+        trackI.matrixR = status->matrixR;
+     }
+     return trackI;
+ }

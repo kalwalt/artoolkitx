@@ -22,6 +22,19 @@ Module["getProjectionMatrix"] = function(nearPlane, farPlane) {
     return returnValue;
 };
 
+Module["getTrackablesInfo2"] = function(count, track) {
+  if ( ! Module.cwrap('arwGetTrackables', 'null',['number', 'number'], [count, track])){
+      return undefined;
+    }
+    var returnObject = {
+      uid: track.uid,
+      visible: track.visible,
+      matrix: track.matrix,
+      matrixR: track.matrixR
+    }
+    return returnObject;
+}
+
 Module["getTrackablePatternConfig"] = function (trackableId, patternID) {
     var heapBytes = _arrayToHeap(new Float64Array(16));
     var widthHeapBytes = _arrayToHeap(new Float64Array(1));
@@ -47,7 +60,7 @@ Module["getTrackablePatternConfig"] = function (trackableId, patternID) {
 
     return returnObject;
 }
-    
+
 Module["getTrackablePatternImage"] = function (trackableId, patternID) {
 
     //Read trackable pattern config to get the size of the trackable. This is needed to define the Array size.

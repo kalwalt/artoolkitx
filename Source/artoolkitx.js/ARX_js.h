@@ -9,6 +9,15 @@ int addTrackable(std::string cfg);
 bool arwStartRunningJS(std::string cparaName, int width, int height);
 int pushVideoInit(int videoSourceIndex, int width, int height, std::string pixelFormat, int camera_index, int camera_face);
 
+struct TrackablesInfo{
+  int uid;
+  bool visible;
+  float *matrix;
+  float *matrixR;
+};
+
+TrackablesInfo getTrackables(int count);
+
 struct VideoParams {
     int width;
     int height;
