@@ -22,7 +22,7 @@ Module["getProjectionMatrix"] = function(nearPlane, farPlane) {
     return returnValue;
 };
 
-Module["getTrackablesInfo2"] = function(count, track) {
+Module["getTrackablesInfo"] = function(count, track) {
   if ( ! Module.cwrap('arwGetTrackables', 'null',['number', 'number'], [count, track])){
       return undefined;
     }
