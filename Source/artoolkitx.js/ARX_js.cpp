@@ -65,18 +65,3 @@ VideoParams getVideoParams() {
     }
     return videoParams;
 }
-
-//TODO: to be implemented
- TrackablesInfo getTrackables(int count) {
-     ARWTrackableStatus *status;
-     TrackablesInfo trackI;
-     if ( !arwGetTrackables(&count, &(status)))
-      return trackI;
-     else {
-        trackI.uid = status->uid;
-        trackI.visible = status->visible;
-        trackI.matrix = status->matrix;
-        trackI.matrixR = status->matrixR;
-     }
-     return trackI;
- }
