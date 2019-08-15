@@ -2,6 +2,7 @@
 #include "ARX/ARX_c.h"
 #include <string>
 #include "ARX/ARController.h"
+
 // #include "ARX_c.cpp"
 
 std::string getARToolKitVersion();
@@ -16,3 +17,8 @@ struct VideoParams {
     std::string pixelFormat;
 };
 VideoParams getVideoParams();
+
+static ARMarkerInfo gMarkerInfo;
+static int MARKER_INDEX_OUT_OF_BOUNDS = -3;
+
+int getMarkerInfo(int id, int markerIndex);
