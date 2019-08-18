@@ -180,3 +180,18 @@ int getMarkerInfo(int id, int markerIndex) {
 
   return 0;
 }
+
+int getTransMatSquareCont(int id, int markerIndex, int markerWidth) {
+
+  ARHandle *arhandle;
+  AR3DHandle *ar3DHandle;
+
+  if (arhandle->marker_num <= markerIndex) {
+    return MARKER_INDEX_OUT_OF_BOUNDS;
+  }
+  ARMarkerInfo* marker = markerIndex < 0 ? &gMarkerInfo : &((arhandle)->markerInfo[markerIndex]);
+
+  arGetTransMatSquareCont(ar3DHandle, marker, gTransform, markerWidth, gTransform);
+
+  return 0;
+}

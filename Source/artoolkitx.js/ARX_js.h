@@ -20,5 +20,7 @@ VideoParams getVideoParams();
 
 static ARMarkerInfo gMarkerInfo;
 static int MARKER_INDEX_OUT_OF_BOUNDS = -3;
+static ARdouble	gTransform[3][4];
 
 int getMarkerInfo(int id, int markerIndex);
+int getTransMatSquareCont(int id, int markerIndex, int markerWidth);

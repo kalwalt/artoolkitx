@@ -38,6 +38,7 @@ EMSCRIPTEN_BINDINGS(constant_bindings) {
     function("getVideoParams", &getVideoParams);
 
     function("getMarker", &getMarkerInfo);
+    function("getTransMatSquareCont", &getTransMatSquareCont);
 
     function("updateAR", &arwUpdateAR);
 
