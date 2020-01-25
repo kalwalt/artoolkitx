@@ -83,5 +83,5 @@ Module["loadOpticalParams"] = function(opticalParamName, opticalParamBuffer, pro
 
 Module["onRuntimeInitialized"] = function() {
     var event = new Event('artoolkitX-loaded');
-    window.dispatchEvent(event);
+    scope.dispatchEvent(event);
 }

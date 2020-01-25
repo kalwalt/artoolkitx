@@ -1,6 +1,15 @@
 /** Web assembly support */
 
-if(window.artoolkitX_wasm_url) {
+var scope;
+    if (typeof window !== 'undefined') {
+        scope = window;
+    } else if (typeof window == 'undefined') {
+        scope = global;
+    } else {
+	scope = global;
+	}
+
+if(scope.artoolkitX_wasm_url) {
     function downloadWasm(url) {
         return new Promise(function(resolve, reject) {
         var wasmXHR = new XMLHttpRequest();
@@ -10,9 +19,9 @@ if(window.artoolkitX_wasm_url) {
         wasmXHR.onerror = function() { reject('error '  + wasmXHR.status); }
         wasmXHR.send(null);
         });
-    }
+    };
 
-const wasm = downloadWasm(window.artoolkitX_wasm_url);
+const wasm = downloadWasm(scope.artoolkitX_wasm_url);
 
     // Module.instantiateWasm is a user-implemented callback which the Emscripten runtime calls to perform
     // the WebAssembly instantiation action. The callback function will be called with two parameters, imports
