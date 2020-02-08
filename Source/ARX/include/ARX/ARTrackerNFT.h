@@ -47,7 +47,11 @@
 
 #include <ARX/ARTrackableNFT.h>
 #include <ARX/ARTrackerVideo.h>
+#if HAVE_EM
+#include <ARX/AR2/trackingMod.h>
+#else
 #include <ARX/AR2/tracking.h>
+#endif
 #include <ARX/KPM/kpm.h>
 
 #define PAGES_MAX 64
@@ -56,11 +60,11 @@ class ARTrackerNFT : public ARTrackerVideo {
 public:
     ARTrackerNFT();
     ~ARTrackerNFT();
-    
+
     ARTrackerType type() const override {
         return ARTrackerType::TEXTURE2D_FIDUCIAL;
     }
-    
+
     std::vector<std::string> trackableConfigurations() const override {
         std::vector<std::string> sv;
         sv.push_back("nft");
@@ -68,10 +72,10 @@ public:
     }
 
     bool initialize() override;
-    
+
     void setNFTMultiMode(bool on);
     bool NFTMultiMode() const;
-    
+
     bool start(ARParamLT *paramLT, AR_PIXEL_FORMAT pixelFormat) override;
     bool start(ARParamLT *paramLT0, AR_PIXEL_FORMAT pixelFormat0, ARParamLT *paramLT1, AR_PIXEL_FORMAT pixelFormat1, const ARdouble transL2R[3][4]) override;
     bool isRunning() override;
@@ -82,16 +86,21 @@ public:
 
     ARTrackable *newTrackable(std::vector<std::string> config) override;
     void deleteTrackable(ARTrackable **trackable_p) override;
-    
+
 private:
     bool m_videoSourceIsStereo;
     bool m_nftMultiMode;
     bool m_kpmRequired;
     bool m_kpmBusy;
     // NFT data.
+    #if HAVE_EM
+    // nothing
+    #else
     THREAD_HANDLE_T     *trackingThreadHandle;
+    #endif
     AR2HandleT          *m_ar2Handle;
     KpmHandle           *m_kpmHandle;
+    KpmResult           *kpmResult;
     AR2SurfaceSetT      *m_surfaceSet[PAGES_MAX]; // Weak-reference. Strong reference is now in ARTrackableNFT class.
     ARdouble m_transL2R[3][4];          ///< For stereo tracking, transformation matrix from left camera to right camera.
 

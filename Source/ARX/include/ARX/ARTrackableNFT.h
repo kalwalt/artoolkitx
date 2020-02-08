@@ -41,7 +41,11 @@
 
 #include <ARX/ARTrackable.h>
 #if HAVE_NFT
-#include <ARX/AR2/tracking.h>
+  #if HAVE_EM
+  #include <ARX/AR2/trackingMod.h>
+  #else
+  #include <ARX/AR2/tracking.h>
+  #endif
 
 /**
  * NFT marker type of ARTrackable.
@@ -60,7 +64,7 @@ private:
     bool unload();
 
 public:
-    
+
 	ARTrackableNFT();
 	~ARTrackableNFT();
 
