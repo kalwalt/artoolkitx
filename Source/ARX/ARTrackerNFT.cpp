@@ -43,7 +43,7 @@
 #if HAVE_NFT
 #include <ARX/ARTrackableNFT.h>
 #if HAVE_EM
-#include <ARX/AR2/Tracking2dMod.h>//need
+#include <ARX/AR2/TrackingMod.h>
 #else
 #include "trackingSub.h"
 #endif
@@ -246,12 +246,23 @@ bool ARTrackerNFT::update(AR2VideoBufferT *buff, std::vector<ARTrackable *>& tra
         float err;
         float trackingTrans[3][4];
         int kpmResultNum = -1;
+        //float err = -1;
 
         if (m_kpmRequired) {
             if (!m_kpmBusy) {
                 #if HAVE_EM
                 kpmMatching(m_kpmHandle, buff->buffLuma );
           			kpmGetResult( m_kpmHandle, &kpmResult, &kpmResultNum );
+                int i, j, k;
+          			int flag = -1;
+          			for( i = 0; i < kpmResultNum; i++ ) {
+          				if (kpmResult[i].pageNo == markerIndex && kpmResult[i].camPoseF == 0 ) {
+          					if( flag == -1 || err > kpmResult[i].error ) { // Take the first or best result.
+          						flag = i;
+          						err = kpmResult[i].error;
+          					}
+          				}
+          			}
                 #else
                 trackingInitStart(trackingThreadHandle, buff->buffLuma);
                 #endif
@@ -259,7 +270,11 @@ bool ARTrackerNFT::update(AR2VideoBufferT *buff, std::vector<ARTrackable *>& tra
             } else {
                 int ret;
                 int pageNo;
+                #if HAVE_EM
+                ret = kpmResult;
+                #else
                 ret = trackingInitGetResult(trackingThreadHandle, trackingTrans, &pageNo);
+                #endif
                 if (ret != 0) {
                     m_kpmBusy = false;
                     if (ret == 1) {
