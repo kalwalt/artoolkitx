@@ -12,6 +12,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/../ARX/AR/include)
 message("CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR}")
 
 add_definitions("-std=c++11")
+add_definitions("-DHAVE_EM=1")
 
 link_directories(${CMAKE_CURRENT_BINARY_DIR}/../ARX ${CMAKE_CURRENT_BINARY_DIR}/../ARX/AR ${CMAKE_CURRENT_BINARY_DIR}/../ARX/ARUtil ${CMAKE_CURRENT_BINARY_DIR}/../ARX/AR2 ${CMAKE_CURRENT_BINARY_DIR}/../ARX/KPM ${CMAKE_CURRENT_BINARY_DIR}/../ARX/ARVideo ${CMAKE_CURRENT_BINARY_DIR}/../ARX/ARG)
 link_libraries(libARX libARVideo libAR libAR2 libARG libARUtil libKPM)

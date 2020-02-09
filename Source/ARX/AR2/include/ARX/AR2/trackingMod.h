@@ -49,13 +49,13 @@
 
 #ifndef __trackingMod_H__
 #define __trackingMod_H__
-#include <AR/ar.h>
-#include <AR/icp.h>
-#include <AR2/config.h>
-#include <AR2/featureSet.h>
-#include <AR2/template.h>
-#include <AR2/marker.h>
-#include <AR2/tracking.h>
+#include <ARX/AR/ar.h>
+#include <ARX/AR/icp.h>
+#include <ARX/AR2/config.h>
+#include <ARX/AR2/featureSet.h>
+#include <ARX/AR2/template.h>
+#include <ARX/AR2/marker.h>
+#include <ARX/AR2/tracking.h>
 
 #define    AR2_TRACKING_6DOF                   1
 #define    AR2_TRACKING_HOMOGRAPHY             2

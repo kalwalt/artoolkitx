@@ -168,9 +168,11 @@ if (ARX_TARGET_PLATFORM_EMSCRIPTEN)
     set(HAVE_OPENCV 0)
     set(HAVE_NFT 1)
     set(HAVE_2D 0)
+    set(HAVE_EM 1)
 else()
     set(HAVE_NFT 1)
     set(HAVE_2D 1)
+    set(HAVE_EM 0)
 endif()
 
 # Cached and project-specific platform variables.
