@@ -31,12 +31,14 @@ set(MEMORY "-s TOTAL_MEMORY=${MEM} ")
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     set(DEBUG_EMCC "-g4 -s SAFE_HEAP=1 -s ASSERTIONS=1 --js-opts 0 -s DEMANGLE_SUPPORT=0" )
     # set(NO_WASM "-s WASM=0")
-    set(WASM_LOADER "--pre-js ${PROJECT_SOURCE_DIR}/artoolkitx.js/ARX_wasmLoader.js")
+    # This is not needed if SINGLE_FILE=1
+    # set(WASM_LOADER "--pre-js ${PROJECT_SOURCE_DIR}/artoolkitx.js/ARX_wasmLoader.js")
 else()
     set(OPTIMIZE_EMCC "-Oz")
     # set(NO_WASM "-s WASM=0")
     # If WASM add a pre-js to register the wasm loader
-    set(WASM_LOADER "--pre-js ${PROJECT_SOURCE_DIR}/artoolkitx.js/ARX_wasmLoader.js")
+    # This is not needed if SINGLE_FILE=1
+    # set(WASM_LOADER "--pre-js ${PROJECT_SOURCE_DIR}/artoolkitx.js/ARX_wasmLoader.js")
 endif()
 
 set_target_properties(artoolkitx PROPERTIES LINK_FLAGS "${MODULE_OPTIONS} ${WASM_FLAGS} ${NO_WASM} ${WASM_LOADER} ${MEMORY} ${DEBUG_EMCC} ${OPTIMIZE_EMCC} --bind --post-js ${PROJECT_SOURCE_DIR}/artoolkitx.js/ARX_additions.js -s EXPORTED_FUNCTIONS='[${EXPORT_FUNCTIONS}]' -s EXTRA_EXPORTED_RUNTIME_METHODS='[${EXPORTED_RUNTIME_FUNCTIONS}]'")
